@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Scarlet_TimersAndTimelines",
+	"Description": "An actor component, that contains logic for custom timers and timelines with delegate norifies",
+	"Category": "Other",
+	"CreatedBy": "AkarFire / K Scarlet",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "Scarlet_TimersAndTimelines",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
