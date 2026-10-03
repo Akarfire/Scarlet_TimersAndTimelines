@@ -61,7 +61,7 @@ void USTT_TimerController::UpdateTimers(float DeltaTime)
 			Timers[Timer].Time = Timers[Timer].InitialTime;
 
 		else
-			DeleteTimer(Timer);
+			Timers[Timer].Paused = true;
 	}
 }
 
@@ -99,10 +99,13 @@ bool USTT_TimerController::ResetTimer(FName TimerName)
 }
 
 // Starts a timer
-bool USTT_TimerController::StartTimer(FName TimerName)
+bool USTT_TimerController::StartTimer(FName TimerName, bool Reset)
 {
 	if (!Timers.Contains(TimerName))
 		return false;
+
+	if (Reset)
+		ResetTimer(TimerName);
 
 	FTimer& Timer = Timers[TimerName];
 	Timer.Paused = false;
@@ -156,6 +159,16 @@ bool USTT_TimerController::UnSubscribeFromTimer(FName TimerName, UObject* Subscr
 	TScriptDelegate Delegate;
 	Delegate.BindUFunction(Subscriber, NotificationFunctionName);
 	Timers[TimerName].OnTimerFinished.Remove(Delegate);
+
+	return true;
+}
+
+bool USTT_TimerController::ChangeTimerLength(FName TimerName, float NewLength)
+{
+	if (!Timers.Contains(TimerName))
+		return false;
+
+	Timers[TimerName].InitialTime = NewLength;
 
 	return true;
 }

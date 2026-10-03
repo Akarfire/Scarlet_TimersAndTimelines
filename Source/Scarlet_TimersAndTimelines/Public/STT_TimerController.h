@@ -75,7 +75,7 @@ public:
 
 	// Starts a timer
 	UFUNCTION(BlueprintCallable, Category = "STT|Timers")
-	bool StartTimer(FName TimerName);
+	bool StartTimer(FName TimerName, bool Reset = true);
 
 	// Pauses a timer
 	UFUNCTION(BlueprintCallable, Category = "MSTT|Timers")
@@ -93,10 +93,17 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "STT|Timers")
 	bool UnSubscribeFromTimer(FName TimerName, UObject* Subscriber, FName NotificationFunctionName);
 
+	// Changes timer's length (only applied after a reset)
+	UFUNCTION(BlueprintCallable, Category = "STT|Timers")
+	bool ChangeTimerLength(FName TimerName, float NewLength);
+
 	// Returns the value of the timer
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "STT|Timers")
 	float GetTimerValue(FName TimerName);
 
+	// DEBUG
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "STT|Timers|Debug")
+	void GetAllTimerNames(TArray<FName>& OutNames) { Timers.GetKeys(OutNames); }
 
 
 // TIMELINES
@@ -203,4 +210,8 @@ public:
 	// Returns timeline is reversed value
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "STT|Timelines")
 	bool GetTimelineReversed(FName TimelineName);
+
+	// DEBUG
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "STT|Timelines|Debug")
+	void GetAllTimelineNames(TArray<FName>& OutNames) { Timelines.GetKeys(OutNames); }
 };
